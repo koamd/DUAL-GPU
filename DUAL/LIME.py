@@ -1,8 +1,7 @@
 import numpy as np
 import cupy as cp
 import cupyx.scipy.fft as cufft
-import scipy.fft
-from scipy.fft import *
+#from scipy.fft import *
 from skimage import exposure
 import cv2
 from tqdm import trange

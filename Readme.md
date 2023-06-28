@@ -30,6 +30,7 @@ conda activate cupyenv
 conda install -c conda-forge cupy cudatoolkit=11.4
 conda install -c conda-forge cupy cudnn cutensor nccl
 conda install -c anaconda scikit-image
+conda install -c conda-forge opencv
 pip install bm3d
 
 ```
@@ -47,6 +48,8 @@ conda env create -f environment.yml
 | ------------- | ------------- |
 | --i        | (Input) Path to folder containing images to process |  
 | --bm3d        | (Input) Flag to indicate that you wish to use bm3d to process the DUAL output |  
+| --o       | (Output) Path to store enhanced images |
+| --dual        | (Input) Flag to indicate that we want to store the DUAL output. Only can be activated if bm3d is activated. Else DUAL is stored by default if bm3d is not activated.  |  
 
 
 For example:

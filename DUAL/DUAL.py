@@ -13,6 +13,10 @@ class DUAL:
         self.imgrev = 1 - self.img
         self.imgname = os.path.split(imgPath)[-1]
 
+    def store_img(self, img_np):
+        self.img = img_np.copy() / 255
+        self.imgrev = 1 - self.img
+
     # multi-exposure image fusion 
     def multi_exposureimageFushion(self):
         mergecore = cv2.createMergeMertens(1,1,1)

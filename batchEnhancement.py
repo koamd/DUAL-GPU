@@ -37,6 +37,14 @@ def parse_args_and_config():
                         help='Use this argument to Use bm3d'
                         )
     
+    parser.add_argument('--o',default='output', type=str,
+                        help='Output folder'
+                        )
+    
+    parser.add_argument('--dual',action='store_true',
+                        help='Store intermediate output'
+                        )
+    
     args = parser.parse_args()
 
     return args
@@ -56,12 +64,12 @@ def main():
 
     setup_dual(iterations=30) #the more vibrant the colors, the more iteration you will need. For grayscale, we can set this to 10. 
 
-    output_folder = 'output/dual'
+    output_folder = args.o
 
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    sigma_psd = 20/255
+    sigma_psd = 15/255
         
     #average_loss = 0.0
     for index, filename in enumerate(pic_files_original_img):
@@ -75,15 +83,18 @@ def main():
 
         #run bm3d filtering
         if args.bm3d : 
-
-            cv2.imwrite(os.path.join(output_folder, 'dual_' +  tail), (out_img * 255).astype(np.uint8))
+            
+            if args.dual: #flag indicates that we want to get dual output
+                cv2.imwrite(os.path.join(output_folder, 'dual_' +  tail), (out_img * 255).astype(np.uint8))
 
             print('[Info] Running BM3D on Dual output ')
             img_bm3d = bm3d_filter(out_img, sigma_psd)
             img_bm3d = np.clip(img_bm3d, 0, 1)
             img_bm3d_np = (img_bm3d*255).astype(np.uint8)
             
-            cv2.imwrite(os.path.join(output_folder, 'dual_bm3d_' + tail), img_bm3d_np)  
+            #cv2.imwrite(os.path.join(output_folder, 'dual_bm3d_' + tail), img_bm3d_np)  
+            cv2.imwrite(os.path.join(output_folder, tail), img_bm3d_np)  
+
         else:
             out_img = (out_img * 255).astype(np.uint8)
             cv2.imwrite(os.path.join(output_folder, 'dual_' + tail), out_img)        
@@ -95,4 +106,4 @@ if __name__ == "__main__":
 
 
 
-#python batchEnhancement.py --i /home/htx/Data/CBRNE/Contrast_enhancement_testing --bm3d
+#python batchEnhancement.py --i /home/htx/Data/CBRNE/Contrast_enhancement_testing --bm3d --o /output/dual/

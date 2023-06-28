@@ -2,3 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
+/external_SD1
+batchEnhancement_text.py
+bm3d_dataset_generator.py
