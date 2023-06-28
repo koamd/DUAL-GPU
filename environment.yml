@@ -1,7 +1,7 @@
 name: cupyenv
 channels:
-  - conda-forge
   - anaconda
+  - conda-forge
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
@@ -79,6 +79,7 @@ dependencies:
   - nspr=4.35=h6a678d5_0
   - nss=3.89.1=h6a678d5_0
   - numpy=1.22.3=py38h99721a1_2
+  - openblas=0.3.20=pthreads_h320a7e8_0
   - opencv=4.6.0=py38h417a72b_3
   - openh264=2.1.1=h4ff587b_0
   - openjpeg=2.4.0=h3ad879b_0
@@ -113,4 +114,6 @@ dependencies:
   - pip:
     - bm3d==4.0.1
     - bm4d==4.2.3
+    - click==8.1.3
+    - cucim==23.4.1
 prefix: /home/htx/anaconda3/envs/cupyenv

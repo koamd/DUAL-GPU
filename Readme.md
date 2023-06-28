@@ -32,6 +32,7 @@ conda install -c conda-forge cupy cudnn cutensor nccl
 conda install -c anaconda scikit-image
 conda install -c conda-forge opencv
 pip install bm3d
+pip install cucim
 
 ```
 

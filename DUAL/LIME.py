@@ -2,7 +2,9 @@ import numpy as np
 import cupy as cp
 import cupyx.scipy.fft as cufft
 #from scipy.fft import *
-from skimage import exposure
+from skimage import exposure as exposure_cpu
+from cucim.skimage import exposure as exposure_gpu
+
 import cv2
 from tqdm import trange
 
@@ -65,9 +67,9 @@ class LIME:
 
         denominator_cp = cp.array(self.DTD * miu + 2)
         
-        T = cp.asnumpy(cp.real(cufft.ifft2(numerator_cp / denominator_cp)))
+        T = cp.real(cufft.ifft2(numerator_cp / denominator_cp))
+        return exposure_gpu.rescale_intensity(T, (0, 1), (0.001, 1))
 
-        return cp.array(exposure.rescale_intensity(T, (0, 1), (0.001, 1)))
 
     # G subproblem
     def G_sub(self, T, Z, miu, W):
@@ -99,8 +101,7 @@ class LIME:
 
             self.T = T ** self.gamma
             self.R = self.L / cp.repeat(self.T[..., None], 3, axis = -1)
-            R_np = cp.asnumpy(self.R)
-            return exposure.rescale_intensity(R_np,(0,1)) * 255
-        # TODO: rapid algorithm
+            return cp.asnumpy(exposure_gpu.rescale_intensity(self.R,(0,1)) * 255)
+    
         else:
             pass
