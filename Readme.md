@@ -5,9 +5,9 @@ We aim to create a DUAL package for LLIE in GPU.
 This project is a modification from the original repository: 
 https://github.com/Henry-GongZY/Low-light-Image-Enhancement
 
-All codes in numpy are converted to cupy to make use of the CUDA GPU resources. 
+All codes in DUAL, LIME that are in numpy are converted to cupy to make use of the CUDA GPU resources. 
 
-It implements the papers:
+The project implements the following papers:
 
  * Dual Illumination Estimation for Robust Exposure Correction [[link](https://arxiv.org/pdf/1910.13688.pdf)]
  * LIME: Low-light Image Enhancement via Illumination Map Estimation [[link](https://ieeexplore.ieee.org/document/7782813)]
@@ -19,6 +19,8 @@ The project was tested on
 * python>=3.8
 * CUDA == 11.4
 * CuPy == 10.4.0
+* cucim == 23.4.1
+* OS: Ubuntu 20.04
 
 The preferred way to manage the packages is through conda. In that way, you dont have to install cudatoolkit, cutensor, and nccl separately. 
 

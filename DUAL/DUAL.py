@@ -25,19 +25,19 @@ class DUAL:
 
     def run(self):
         # generate enhanced image
-        print('[Info] Using LIME for forward illumination enhancement!')
+        #print('[Info] Using LIME for forward illumination enhancement!')
         self.limecore.loadimage(self.img)
         self.forwardimg = self.limecore.run()
         #cv2.imwrite("./pics/DUAL_forward_{}".format(self.imgname),self.forwardimg)
 
         # generate suppressed image
-        print('[Info] Using LIME for reverse illumination enhancement!')
+        #print('[Info] Using LIME for reverse illumination enhancement!')
         self.limecore.loadimage(self.imgrev)
         self.reverseimg = 255 - self.limecore.run()
         #cv2.imwrite("./pics/DUAL_reverse_{}".format(self.imgname), self.reverseimg)
 
         # fuse input image, enhanced image and suppressed image to generate final results
-        print('[Info] Use multi-exposure image fusion to generate the result!')
+        #print('[Info] Use multi-exposure image fusion to generate the result!')
         l = self.multi_exposureimageFushion()
         #cv2.imwrite("./pics/DUAL_result_{}".format(self.imgname), l * 255)
 

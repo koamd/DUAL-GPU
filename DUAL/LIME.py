@@ -1,14 +1,10 @@
 import numpy as np
 import cupy as cp
 import cupyx.scipy.fft as cufft
-#from scipy.fft import *
-from skimage import exposure as exposure_cpu
 from cucim.skimage import exposure as exposure_gpu
 
 import cv2
 from tqdm import trange
-
-#scipy.fft.set_global_backend(cufft)
 
 class LIME:
     # initiate parameters
@@ -93,7 +89,7 @@ class LIME:
             Z = cp.zeros((self.row * 2, self.col))
             miu = 1
 
-            for i in trange(0,self.iterations):
+            for i in trange(0,self.iterations, disable=True):
                 T = self.T_sub(G, Z, miu)
                 G = self.G_sub(T, Z, miu, self.W)
                 Z = self.Z_sub(T, G, Z, miu)
